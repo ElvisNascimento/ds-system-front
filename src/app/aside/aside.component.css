@@ -10,7 +10,7 @@
     --color-dark: #363949;
     --color-light: rgba(132, 139, 200, 0.18);
     --color-dark-variant: #677483;
-    --color-background: #a7a7aa;
+    --color-background: #f6f6f9;
 
     --card-border-radius: 2rem;
     --border-radius-1: 0.4rem;
@@ -114,14 +114,11 @@ b{
 }
 
 .container{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    display: grid;
     width: 96%;
     margin: 0 auto;
     gap: 1.8rem;
-
+    grid-template-columns: 12rem auto 23rem;
 }
 
 aside{
@@ -153,7 +150,7 @@ aside .toggle .close{
 aside .sidebar{
     display: flex;
     flex-direction: column;
-    background-color: var(--color-white);
+    background-color: var(--color-danger);
     box-shadow: var(--box-shadow);
     border-radius: 15px;
     height: 88vh;

@@ -7,7 +7,15 @@ import { FormularioService } from './formulario.service';
   styleUrls: ['./formulario.component.css']
 })
 export class FormularioComponent {
-  formData = { nome: '', email: '' };
+  formData = {
+    nome: '',
+    cpf: '000.000.000-00',
+    email: '',
+    telefone: '',
+    escolaridade: [],
+    funcao:'',
+    competencias: []
+  };
 
   constructor(private formularioService: FormularioService) { }
 
