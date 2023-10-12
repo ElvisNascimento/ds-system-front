@@ -1,0 +1,42 @@
+*{
+  overflow-x: hidden;
+  font-size: 0.8rem;
+}
+.form-group{
+  width: 100%;
+  margin-left: 5px;
+}
+button{
+  text-align: center;
+
+}
+.btn_save{
+  margin-bottom: 10px;
+}
+label{
+  font-weight: 500;
+  color: white;
+}
+/* Adicione este código à sua folha de estilos CSS */
+.animated_background {
+
+  height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(-45deg, #ee7752, #9e2020, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: mudarCores 15s ease infinite alternate;
+}
+@keyframes mudarCores {
+  0% {
+    background-position: 0% 50%;
+  }
+  100% {
+    background-position: 100% 50%;
+  }
+}
+h1{
+  font-weight: 600;
+  padding-top: 30px;
+}

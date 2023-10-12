@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CurriculosService } from './curriculo.service';
+import { AuthService } from './auth/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -9,16 +10,20 @@ import { CurriculosService } from './curriculo.service';
 export class AppComponent implements OnInit{
   title = 'project-ds-front';
 
-  constructor (private curriculosService: CurriculosService){}
+  constructor (private authService:AuthService, private curriculosService: CurriculosService){}
 
   ngOnInit(): void {
-    this.curriculosService.getCurriculos().subscribe(
-      data => {
-        console.log(data); // Aqui estão os dados do NestJS
-      },
-      error => {
-        console.error(error);
-      }
-    );
+    // this.curriculosService.getCurriculos().subscribe(
+    //   data => {
+    //     console.log(data);
+    //   },
+    //   error => {
+    //     console.error(error);
+    //   }
+    // );
+    // this.authService.login(Credential).subscribe({
+    //   next : ()=>{console.log(Credential)},
+
+    //   });
   }
 }

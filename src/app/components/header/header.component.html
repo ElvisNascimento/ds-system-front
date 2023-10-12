@@ -1,0 +1,15 @@
+<mat-toolbar class="header mat-elevation-z3">
+  <span>
+    <a href="/">
+      <img routerLink="/" class="logo" src="assets/images/logo.png" alt="logo">
+    </a>
+  </span>
+  <span  [ngClass]="{'esconder-elemento': condicao}" class="title-group">
+    <a href="">
+      <i class="material-icons">
+        dashboard
+      </i>
+      <h1>Dashboard</h1>
+    </a>
+  </span>
+</mat-toolbar>

@@ -7,14 +7,30 @@ import { FormularioService } from './formulario.service';
   styleUrls: ['./formulario.component.css']
 })
 export class FormularioComponent {
-  formData = {
+  formData: {
+    nome: string;
+    cpf: string;
+    email: string;
+    telefone: string;
+    escolaridade: string[];
+    funcao: string;
+    competencias: {
+      nome: string;
+      descricao: string;
+      level: string;
+    }[];
+  } = {
     nome: '',
     cpf: '000.000.000-00',
     email: '',
     telefone: '',
     escolaridade: [],
-    funcao:'',
-    competencias: []
+    funcao: '',
+    competencias: [{
+      nome: '',
+      descricao: '',
+      level: ''
+    }]
   };
 
   constructor(private formularioService: FormularioService) { }
@@ -29,5 +45,8 @@ export class FormularioComponent {
         console.error('Erro ao enviar os dados', error);
       }
     );
+  }
+  adicionarCompetencia() {
+    this.formData.competencias.push({ nome: '', descricao: '', level: '' });
   }
 }

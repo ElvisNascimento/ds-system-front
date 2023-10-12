@@ -34,26 +34,28 @@
       <label for="funcao">Função:</label>
       <input type="text" class="form-control" id="funcao" name="funcao" [(ngModel)]="formData.funcao" required>
     </div>
-
-    <div>
     <div class="form-group">
-      <label for="competencias">Lista de Competencias:</label><button >+</button><br>
-        <label name="competencias_nome">Nome:</label>
-        <input type="text" class="form-control" id="competencias_nome" name="competencias_nome"
-          [(ngModel)]="formData.competencias" required><br>
-        <label name="competencias_descricao">Descrição:</label>
-        <input type="text" class="form-control" id="competencias_descricao" name="competencias_descricao"
-          [(ngModel)]="formData.competencias" required><br>
-        <label name="competencias_nivel">Nivel da Competencia:</label>
-        <select name="competencias_nivel" id="competencias_nivel">
-          <option value="1">1</option>
-          <option value="2">2</option>
-          <option value="3">3</option>
-          <option value="4">4</option>
-          <option value="5">5</option>
-        </select>
+      <label for="competencias">Lista de Competências:</label>
+      <button (click)="adicionarCompetencia()">+</button><br>
+      <div id="lista_competencias">
+        <div *ngFor="let competencia of formData.competencias; let i = index" class="competencia-item">
+          <label for="competencias_nome">Nome:</label>
+          <input type="text" class="form-control" id="competencias_nome{{i}}" name="competencias_nome"
+            [(ngModel)]="competencia.nome" required><br>
+          <label for="competencias_descricao">Descrição:</label>
+          <input type="text" class="form-control" id="competencias_descricao{{i}}" name="competencias_descricao"
+            [(ngModel)]="competencia.descricao" required><br>
+          <label for="competencias_nivel">Nivel da Competencia:</label>
+          <select name="competencias_nivel" id="competencias_nivel{{i}}" [(ngModel)]="competencia.level">
+            <option value="1">Iniciante</option>
+            <option value="2">Junior</option>
+            <option value="3">Pleno</option>
+            <option value="4">Sênior</option>
+          </select>
+        </div>
       </div>
     </div>
+
     <button type="submit">Enviar</button>
   </form>
 </div>
