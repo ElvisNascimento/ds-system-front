@@ -8,9 +8,11 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./admin.component.css']
 })
 export class AdminComponent implements OnInit {
+  
   loggedInUser: string= '';
 
   constructor(private router: Router, private authService: AuthService){}
+
   ngOnInit(): void {
     this.authService.loggedInUser$.subscribe((username) => {
       this.loggedInUser = username;

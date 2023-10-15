@@ -14,13 +14,14 @@ export class RegisterComponent {
   }
 
   newUserCredentials = new FormGroup({
-    'name': new FormControl('',Validators.required),
-    'email': new FormControl('',[Validators.required, Validators.email]),
-    'password': new FormControl('',Validators.required)
+    'name': new FormControl('', Validators.required),
+    'email': new FormControl('', [Validators.required, Validators.email]),
+    'password': new FormControl('', Validators.required)
   });
 
   register() {
-    console.log(this.newUserCredentials.value);
-    this.authService.register(this.newUserCredentials);
+    const formValues = this.newUserCredentials.value;
+    return this.authService.register(formValues);
   }
+
 }
