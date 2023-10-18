@@ -19,9 +19,9 @@ label{
 }
 /* Adicione este código à sua folha de estilos CSS */
 .animated_background {
-
-  height: 100vh;
+  height: 900px;
   display: flex;
+  
   justify-content: center;
   align-items: center;
   background: linear-gradient(-45deg, #ee7752, #9e2020, #23a6d5, #23d5ab);

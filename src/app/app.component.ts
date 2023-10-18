@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { CurriculosService } from './curriculo.service';
+import { CurriculosService } from './pages/user/curriculo.service';
 import { AuthService } from './auth/auth.service';
 
 @Component({

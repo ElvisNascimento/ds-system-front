@@ -1,11 +1,12 @@
 <!-- dashboard.component.html -->
+<app-header></app-header>
 <div class="row animated_background d-flex justify-content-center ">
   <!-- Formulário de Criação de Currículo -->
   <form [formGroup]="curriculo" class="col-6 gap-2 text-center d-flex flex-column align-items-center">
     <h1>Criar Um Novo Currículo</h1>
     <div class="form-group">
-      <label for="nome">Nome Completo:</label>
-      <input class="form-control" formControlName="nome" type="text" id="nome" name="nome" >
+      <label for="name">Nome Completo:</label>
+      <input class="form-control" formControlName="name" type="text" id="name" name="name" >
     </div>
 
     <div class="form-group">
@@ -19,18 +20,18 @@
     </div>
 
     <div class="form-group">
-      <label for="telefone">Telefone:</label>
-      <input class="form-control" formControlName="telefone" mask="(00)00000.0000" type="tel" id="telefone" name="telefone">
+      <label for="phone">Telefone:</label>
+      <input class="form-control" formControlName="phone" mask="(00)00000.0000" type="tel" id="phone" name="phone">
     </div>
     <div class="d-flex w-100">
       <div class="form-group ">
-        <label for="dataNascimento">Data de Nascimento:</label>
-        <input class="form-control text-center" formControlName="dataNascimento" type="date" id="dataNascimento" name="dataNascimento" required>
+        <label for="born">Data de Nascimento:</label>
+        <input class="form-control text-center" formControlName="born" type="date" id="born" name="born" required>
       </div>
 
       <div class="form-group">
-        <label for="escolaridade">Escolaridade:</label>
-        <select class="form-control text-center" formControlName="escolaridade" id="escolaridade" name="escolaridade" required>
+        <label for="education">Escolaridade:</label>
+        <select class="form-control text-center" formControlName="education" id="education" name="education" required>
           <option value="Analfabeto">Analfabeto</option>
           <option value="Fundamental Completo">Fundamental Completo</option>
           <option value="Médio Incompleto">Médio Incompleto</option>
@@ -45,31 +46,36 @@
     </div>
 
     <div class="form-group">
-      <label for="funcao">Função:</label>
-      <input class="form-control" formControlName="funcao" type="text" id="funcao" name="funcao" required>
+      <label for="func">Função:</label>
+      <input class="form-control" formControlName="func" type="text" id="func" name="func" required>
     </div>
 
     <div class="form-group">
-      <label for="competencia">Lista de Competências:</label>
-      <div class="competencia">
-        <div>
-          <label class="text-left" for="competencia">Competência</label>
-          <div class="d-flex mb-2">
-            <input class="form-control w-50" formControlName="competencia" type="text" id="competencia" placeholder="Competência">
-            <select class="form-control w-50" name="proficiencia">
-              <option value="Básico">Básico</option>
-              <option value="Intermediário">Intermediário</option>
-              <option value="Avançado">Avançado</option>
-            </select>
+      <label for="skills">Lista de Competências:</label>
+      <div class="skills">
+        <div formArrayName="skills">
+          <div *ngFor="let skill of skills.controls; let i = index">
+            <div [formGroupName]="i">
+              <label class="text-left" for="skills">Competência</label>
+              <div class="d-flex mb-2">
+                <input class="form-control w-50" formControlName="name" type="text" id="skills" placeholder="Competência">
+                <select class="form-control w-50" formControlName="level" name="proficiencia">
+                  <option value="Básico">Básico</option>
+                  <option value="Intermediário">Intermediário</option>
+                  <option value="Avançado">Avançado</option>
+                </select>
+              </div>
+              <div class="d-flex">
+                <input class="form-control w-75" type="text" formControlName="description" placeholder="Descrição da Competência">
+                <button class="btn btn-danger w-25" (click)="removeCompetencia(i)">Remover</button>
+              </div>
+            </div>
           </div>
-          <div class="d-flex">
-            <input class="form-control w-75" type="text" placeholder="Descrição da Competência">
-            <button class="btn btn-danger w-25" (click)="removeCompetencia">Remover</button>
-          </div>
-          <button class="btn btn-info mt-2" (click)="addCompetencia">Adicionar Competência</button>
         </div>
       </div>
+      <button class="btn btn-info mt-2" (click)="addCompetencia()">Adicionar outra competência?</button>
     </div>
-    <button type="button" class="btn btn-primary btn_save" (click)="submitCurriculo()">Salvar Currículo</button>
+    <button type="button" class="btn btn-primary btn_save mb-4" (click)="submitCurriculo()">Salvar Currículo</button>
   </form>
 </div>
+<app-footer></app-footer>

@@ -1,11 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import {
-  AbstractControl,
   FormArray,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
+import { CurriculosService } from './curriculo.service';
 
 @Component({
   selector: 'app-user',
@@ -14,48 +14,63 @@ import {
 })
 export class UserComponent implements OnInit {
   public curriculo: FormGroup = new FormGroup({
-    nome: new FormControl(null, [
+    'name': new FormControl('', [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(50),
     ]),
-    cpf: new FormControl(null, [Validators.required, this.validarCPF]),
-    dataNascimento: new FormControl(null),
-    email: new FormControl(null, [Validators.required, Validators.email]),
-    telefone: new FormControl(null, [
+    'cpf': new FormControl('', [Validators.required, this.validarCPF]),
+    'born': new FormControl(''),
+    'email': new FormControl('', [Validators.required, Validators.email]),
+    'phone': new FormControl('', [
       Validators.required,
       Validators.minLength(11),
       Validators.maxLength(11),
     ]),
-    escolaridade: new FormControl(null),
-    funcao: new FormControl(null),
-    competencias: new FormArray([this.createCompetencia()]),
+    'education': new FormControl(''),
+    'func': new FormControl(''),
+    'skills': new FormArray([this.createCompetencia()]),
   });
 
-  constructor() {}
+  constructor(private curriculosService: CurriculosService) { }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
+
+  get skills() {
+    return (this.curriculo.get('skills') as FormArray);
+  }
 
   addCompetencia() {
-    const competencias = this.curriculo.get('competencias') as FormArray;
-    competencias.push(this.createCompetencia());
+    this.skills.push(this.createCompetencia());
   }
 
   removeCompetencia(index: number) {
-    const competencias = this.curriculo.get('competencias') as FormArray;
-    competencias.removeAt(index);
+    this.skills.removeAt(index);
   }
 
   createCompetencia() {
     return new FormGroup({
-      nome: new FormControl(null),
-      level: new FormControl(null),
-      descricao: new FormControl(null),
+      'name': new FormControl(''),
+      'level': new FormControl(''),
+      'description': new FormControl(''),
     });
   }
 
   submitCurriculo(): void {
-    console.log(this.curriculo);
+    const dataValues = this.curriculo.value;
+    console.log(dataValues);
+
+    this.curriculosService.registerCurriculo(dataValues)
+      .subscribe(
+        response => {
+          console.log('Usuário registrado com sucesso!', response);
+          // Fazer algo aqui após o registro bem-sucedido, se necessário.
+        },
+        error => {
+          console.error('Erro ao registrar usuário:', error);
+          window.alert(error.error?.message || 'Erro ao registrar usuário');
+        }
+      );
   }
 
 

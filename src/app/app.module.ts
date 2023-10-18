@@ -6,7 +6,6 @@ import { AppComponent } from './app.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
-import { ContentComponent } from './components/content/content.component';
 import { FooterComponent } from './components/footer/footer.component';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { NavComponent } from './components/nav/nav.component';
@@ -15,27 +14,28 @@ import { MatListModule } from '@angular/material/list';
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatCardModule } from '@angular/material/card';
-import { HomeComponent } from './pages/home/home.component';
-import { AdminComponent } from './pages/admin/admin.component';
 import { RegisterComponent } from './pages/register/register.component';
 import { LoginComponent } from './pages/login/login.component';
 import { UserComponent } from './pages/user/user.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { JwtModule } from '@auth0/angular-jwt';
+import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
+import { DetalhesCurriculoComponent } from './detalhes-curriculo/detalhes-curriculo.component';
+import { AsideComponent } from './aside/aside.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    HomeComponent,
     HeaderComponent,
-    ContentComponent,
     FooterComponent,
     NavComponent,
-    AdminComponent,
     RegisterComponent,
     LoginComponent,
-    UserComponent
+    UserComponent,
+    AdminDashboardComponent,
+    DetalhesCurriculoComponent,
+    AsideComponent
   ],
   imports: [
     BrowserModule,

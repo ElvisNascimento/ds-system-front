@@ -123,6 +123,7 @@ b{
 
 aside{
     height: 100vh;
+    width: 200px;
 }
 
 aside .toggle{

@@ -1,0 +1,21 @@
+
+.centralizar{
+  display: flex;
+  flex-direction: column;
+  margin-top: 2%;
+  align-items: center;
+}
+button {
+  background-color: #0b3469;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+}
+.card{
+  width: 250px;
+  height: 180px;
+}
+.contain {
+  margin-bottom: 100px;
+}

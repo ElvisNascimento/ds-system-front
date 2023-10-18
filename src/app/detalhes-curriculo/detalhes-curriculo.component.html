@@ -1,0 +1,29 @@
+<div *ngIf="curriculo" class="offcanvas show d-flex justify-content-center align-items-center position-fixed"
+  id="detalhesCurriculo" tabindex="-1" aria-labelledby="detalhesCurriculoLabel" style="
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
+    height: 80%;
+    max-height: auto;
+    z-index: 1050;
+    background-color: darkgrey;
+    box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  ">
+  <h5 class="offcanvas-title" id="detalhesCurriculoLabel">
+    Detalhes do Currículo
+  </h5>
+    <button type="button" class="btn-close " (click)="fecharDetalhes()" aria-label="Fechar"></button>
+  <div class="offcanvas-body" style="
+    width: 80%;
+    max-height: auto;
+">
+    <p>Nome: {{ curriculo.name }}</p>
+    <p>CPF: {{ curriculo.cpf }}</p>
+    <p>Email: {{ curriculo.email }}</p>
+    <p>Telefone: {{ curriculo.phone }}</p>
+    <p>Data de Nascimento: {{ curriculo.born }}</p>
+    <p>Escolaridade: {{ curriculo.education }}</p>
+    <p>Função: {{ curriculo.func }}</p>
+    <p>Competências: {{ curriculo.skills }}</p>
+    <!-- Adicione mais informações conforme necessário -->
