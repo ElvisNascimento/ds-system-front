@@ -1,16 +1,19 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { slideInLeftAnimation, slideInLeftAnimationBack, slideInRightAnimation, slideInRightAnimationBack, slideOutLeftAnimation, slideOutRightAnimation } from 'src/app/animations';
 import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
-  styleUrls: ['./register.component.css']
+  styleUrls: ['./register.component.css'],
+  animations: [slideInLeftAnimation, slideOutRightAnimation, slideOutLeftAnimation, slideInRightAnimation, slideInLeftAnimationBack, slideInRightAnimationBack]
 })
 export class RegisterComponent {
 
   constructor(
-    private authService: AuthService) {
+    private authService: AuthService, private router: Router) {
   }
 
   newUserCredentials = new FormGroup({
@@ -24,4 +27,9 @@ export class RegisterComponent {
     return this.authService.register(formValues);
   }
 
+  navegarParaLoginComAtraso() {
+    setTimeout(() => {
+      this.router.navigate(['/login']);
+    }, 1000);
+  }
 }

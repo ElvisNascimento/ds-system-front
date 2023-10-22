@@ -1,31 +1,37 @@
 <app-header></app-header>
 <div class="container d-flex justify-content-center align-items-center">
-  <div class="card">
-    <div class="card-header bg-success text-white">
-      <h3>Cadastro</h3>
+  <div [@slideOutRightAnimation]>
+    <div class="register-form" [@slideInRightAnimation]>
+      <div class="card-header bg-success text-white">
+        <h3>Cadastro</h3>
+      </div>
+      <div class="card-body">
+        <form [formGroup]="newUserCredentials">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input type="text" class="form-control" id="name" formControlName="name"
+              placeholder="Digite seu Nome de Usuario">
+          </div>
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" formControlName="email" placeholder="Digite seu email">
+          </div>
+          <div class="form-group">
+            <label for="password">Senha</label>
+            <input type="password" class="form-control" id="password" formControlName="password"
+              placeholder="Digite sua senha">
+          </div>
+          <button type="button" class="btn btn-success" (click)="register()">Cadastrar</button>
+        </form>
+      </div>
+      <div class="card-footer">
+        <p>Já tem uma conta? <a (click)="navegarParaLoginComAtraso()" [@slideOutRightAnimation]
+            style="cursor: pointer;">Faça login</a></p>
+      </div>
     </div>
-    <div class="card-body">
-      <form [formGroup]="newUserCredentials">
-        <div class="form-group">
-          <label for="name">Name</label>
-          <input type="text" class="form-control" id="name" formControlName="name"
-            placeholder="Digite seu Nome de Usuario">
-        </div>
-        <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" class="form-control" id="email" formControlName="email" placeholder="Digite seu email">
-        </div>
-        <div class="form-group">
-          <label for="password">Senha</label>
-          <input type="password" class="form-control" id="password" formControlName="password"
-            placeholder="Digite sua senha">
-        </div>
-        <button type="button" class="btn btn-success" (click)="register()">Cadastrar</button>
-      </form>
-    </div>
-    <div class="card-footer">
-      <p>Já tem uma conta? <a routerLink="/login">Faça login</a></p>
-    </div>
+  </div>
+  <div [@slideOutRightAnimation]>
+    <div class="backholder" [@slideInLeftAnimationBack]></div>
   </div>
 </div>
 <app-footer></app-footer>

@@ -5,3 +5,20 @@
   margin-top: 20px;
   height: auto;
 }
+.backholder {
+  background-color: rgb(185, 185, 185);
+  border-radius: 0 10px 10px 0;
+  width: 700px;
+  height: 400px;
+  max-width: 700px;
+  z-index: 1;
+}
+.register-form{
+  padding: 2%;
+  border: 1px solid rgb(187, 187, 187);
+  border-radius: 10px 0 0 10px;
+  width: 300px;
+  height: 400px;
+  max-width: 300px;
+  z-index: 0;
+}
