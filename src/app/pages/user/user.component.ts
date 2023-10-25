@@ -34,7 +34,19 @@ export class UserComponent implements OnInit {
 
   constructor(private curriculosService: CurriculosService) { }
 
-  ngOnInit(): void { }
+  mostrarFormulario = false;
+  curriculosCadastrados: any[] = [];
+
+  ngOnInit(): void {
+    this.curriculosService.getCurriculoSelecionado().subscribe((data: any) => {
+      this.curriculosCadastrados = data;
+    });
+  }
+
+  novoCurriculo() {
+    this.mostrarFormulario = true;
+  }
+
 
   get skills() {
     return (this.curriculo.get('skills') as FormArray);

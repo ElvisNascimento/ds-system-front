@@ -30,6 +30,6 @@ export class RegisterComponent {
   navegarParaLoginComAtraso() {
     setTimeout(() => {
       this.router.navigate(['/login']);
-    }, 1000);
+    }, 500);
   }
 }

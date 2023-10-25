@@ -1,22 +1,24 @@
 <!-- dashboard.component.html -->
 <app-header></app-header>
-<div class="row animated_background d-flex justify-content-center ">
-  <!-- Formulário de Criação de Currículo -->
+<div class="d-flex justify-content-center align-items-center p-4">
+  <button class="btn btn-primary" (click)="novoCurriculo()">Novo currículo</button>
+</div>
+<div *ngIf="mostrarFormulario" class="row animated_background d-flex justify-content-center">
   <form [formGroup]="curriculo" class="col-6 gap-2 text-center d-flex flex-column align-items-center">
     <h1>Criar Um Novo Currículo</h1>
     <div class="form-group">
       <label for="name">Nome Completo:</label>
-      <input class="form-control" formControlName="name" type="text" id="name" name="name" >
+      <input class="form-control" formControlName="name" type="text" id="name" name="name">
     </div>
 
     <div class="form-group">
       <label for="cpf">CPF:</label>
-      <input class="form-control" formControlName="cpf" mask="000.000.000-00" type="text" id="cpf" name="cpf" >
+      <input class="form-control" formControlName="cpf" mask="000.000.000-00" type="text" id="cpf" name="cpf">
     </div>
 
     <div class="form-group">
       <label for="email">E-mail:</label>
-      <input class="form-control" formControlName="email" type="email" id="email" name="email" >
+      <input class="form-control" formControlName="email" type="email" id="email" name="email">
     </div>
 
     <div class="form-group">
@@ -58,7 +60,8 @@
             <div [formGroupName]="i">
               <label class="text-left" for="skills">Competência</label>
               <div class="d-flex mb-2">
-                <input class="form-control w-50" formControlName="name" type="text" id="skills" placeholder="Competência">
+                <input class="form-control w-50" formControlName="name" type="text" id="skills"
+                  placeholder="Competência">
                 <select class="form-control w-50" formControlName="level" name="proficiencia">
                   <option value="Básico">Básico</option>
                   <option value="Intermediário">Intermediário</option>
@@ -66,7 +69,8 @@
                 </select>
               </div>
               <div class="d-flex">
-                <input class="form-control w-75" type="text" formControlName="description" placeholder="Descrição da Competência">
+                <input class="form-control w-75" type="text" formControlName="description"
+                  placeholder="Descrição da Competência">
                 <button class="btn btn-danger w-25" (click)="removeCompetencia(i)">Remover</button>
               </div>
             </div>

@@ -1,24 +1,58 @@
-*{
+* {
   padding-bottom: 5px;
 }
-.container{
+
+.container {
   margin-top: 20px;
+  width: 90%;
   height: auto;
 }
+
+.card-header{
+  border-radius: 10px 0 0 10px;
+  height: 38px;
+  padding: 2%;
+  margin: 2% 0 2% 0;
+}
+
 .backholder {
   background-color: rgb(185, 185, 185);
   border-radius: 0 10px 10px 0;
-  width: 700px;
+  width: 400px;
   height: 400px;
-  max-width: 700px;
+  max-width: 400px;
   z-index: 1;
 }
 .register-form{
   padding: 2%;
   border: 1px solid rgb(187, 187, 187);
   border-radius: 10px 0 0 10px;
-  width: 300px;
+  width: 250px;
   height: 400px;
-  max-width: 300px;
+  max-width: 250px;
   z-index: 0;
+}
+@media (max-width: 600px) {
+  .card-header{
+    border-radius: 10px;
+    height: 38px;
+    padding: 2%;
+    margin: 2% 0 2% 0;
+  }
+  .backholder {
+    display: none;
+    background-color: rgb(185, 185, 185);
+    border-radius: 0 10px 10px 0;
+    width: 100px;
+    height: 400px;
+    z-index: 1;
+  }
+  .register-form{
+    padding: 3%;
+    border: 1px solid rgb(187, 187, 187);
+    border-radius: 10px;
+    width: 400px;
+    height: 400px;
+    z-index: 0;
+  }
 }
