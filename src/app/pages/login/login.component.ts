@@ -26,4 +26,9 @@ export class LoginComponent {
   login() {
     this.authService.login(this.credentials.value);
   }
+  navegarParaLoginComAtraso() {
+    setTimeout(() => {
+      this.router.navigate(['/register']);
+    }, 500);
+  }
 }

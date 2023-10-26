@@ -1,12 +1,12 @@
 <app-header></app-header>
-<div class="d-flex">
-<app-aside></app-aside>
-<div class="centralizar">
+<div class="row">
+<app-aside class="col-0 col-sm-2"></app-aside>
+<div class="centralizar col-12 col-sm-10">
   <h1>Welcome, {{ loggedInUser }}!</h1>
   <h2>Currículos Cadastrados</h2>
-  <div class="contain row" >
-    <div class="col-10 col-sm-6 col-lg-4 col-xl-3 mb-2"  *ngFor="let curriculo of curriculos">
-      <div class="card">
+  <div class="container row border" >
+    <div class="col-12 col-sm-3" *ngFor="let curriculo of curriculos">
+      <div class="card col-12 p-2 mb-2">
         <div class="card-body">
           <h5 class="card-title">Nome: {{ curriculo.name }}</h5>
           <p class="card-text">Email: {{ curriculo.email }}</p>

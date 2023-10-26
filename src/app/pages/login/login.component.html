@@ -1,6 +1,6 @@
 <app-header></app-header>
 <div class="container d-flex justify-content-center align-items-center">
-  <div [@slideInRightAnimation]>
+  <div  [@slideOutRightAnimation] [@slideInRightAnimation] >
     <div class="login-form">
       <div class="card-header bg-primary text-white">
         <h3>Login</h3>
@@ -20,7 +20,8 @@
         </form>
       </div>
       <div class="card-footer">
-        <p>Não tem uma conta? <a routerLink="/register">Cadastre-se</a></p>
+        <p>Não tem uma conta?  <a (click)="navegarParaLoginComAtraso()"
+          style="cursor: pointer;">Cadastre-se</a></p>
       </div>
     </div>
   </div>

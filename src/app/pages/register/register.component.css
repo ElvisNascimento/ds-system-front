@@ -8,7 +8,7 @@
   height: auto;
 }
 
-.card-header{
+.card-header {
   border-radius: 10px 0 0 10px;
   height: 38px;
   padding: 2%;
@@ -20,25 +20,28 @@
   border-radius: 0 10px 10px 0;
   width: 400px;
   height: 400px;
-  max-width: 400px;
+  max-width: 700px;
   z-index: 1;
 }
-.register-form{
-  padding: 2%;
+
+.register-form {
+  padding: 20px;
   border: 1px solid rgb(187, 187, 187);
   border-radius: 10px 0 0 10px;
-  width: 250px;
+  width: 280px;
   height: 400px;
-  max-width: 250px;
+  max-width: 280px;
   z-index: 0;
 }
+
 @media (max-width: 600px) {
-  .card-header{
+  .card-header {
     border-radius: 10px;
     height: 38px;
     padding: 2%;
     margin: 2% 0 2% 0;
   }
+
   .backholder {
     display: none;
     background-color: rgb(185, 185, 185);
@@ -47,12 +50,13 @@
     height: 400px;
     z-index: 1;
   }
-  .register-form{
-    padding: 3%;
+
+  .register-form {
+    padding: 20px;
     border: 1px solid rgb(187, 187, 187);
     border-radius: 10px;
-    width: 400px;
     height: 400px;
+    max-width: 280px;
     z-index: 0;
   }
 }

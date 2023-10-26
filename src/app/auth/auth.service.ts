@@ -22,6 +22,8 @@ export class AuthService {
           localStorage.setItem('token', token);
           const decodedToken: any = jwt_decode(token);
           this.username = decodedToken.name;
+          console.log(this.setLoggedInUser());
+
 
           if (decodedToken.admin) {
             this.router.navigate(['admin']);
@@ -40,7 +42,7 @@ export class AuthService {
 
   loggedInUser$ = this.loggedInUserSubject.asObservable();
 
-  setLoggedInUser(username: string) {
+  setLoggedInUser():string{
     return this.username;
   }
 

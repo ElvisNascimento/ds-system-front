@@ -1,7 +1,10 @@
 <!-- dashboard.component.html -->
 <app-header></app-header>
 <div class="d-flex justify-content-center align-items-center p-4">
-  <button class="btn btn-primary" (click)="novoCurriculo()">Novo currículo</button>
+  <div class="d-flex justify-content-center flex-column align-items-center p-4">
+    <h1>Welcome, {{ loggedInUser }}!</h1>
+    <button class="btn btn-primary" (click)="novoCurriculo()">Novo currículo</button>
+  </div>
 </div>
 <div *ngIf="mostrarFormulario" class="row animated_background d-flex justify-content-center">
   <form [formGroup]="curriculo" class="col-6 gap-2 text-center d-flex flex-column align-items-center">

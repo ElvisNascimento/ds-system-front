@@ -12,10 +12,8 @@ button {
   padding: 10px 20px;
   cursor: pointer;
 }
-.card{
-  width: 250px;
-  height: 180px;
-}
-.contain {
+.container {
+  margin: 5%;
+  width: 95%;
   margin-bottom: 100px;
 }

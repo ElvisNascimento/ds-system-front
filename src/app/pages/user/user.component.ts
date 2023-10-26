@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { CurriculosService } from './curriculo.service';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-user',
@@ -32,7 +33,9 @@ export class UserComponent implements OnInit {
     'skills': new FormArray([this.createCompetencia()]),
   });
 
-  constructor(private curriculosService: CurriculosService) { }
+  loggedInUser: string = this.authService.setLoggedInUser();
+
+  constructor(private authService: AuthService , private curriculosService: CurriculosService) { }
 
   mostrarFormulario = false;
   curriculosCadastrados: any[] = [];
