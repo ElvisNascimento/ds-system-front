@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { CurriculosService } from '../pages/user/curriculo.service';
+import { CurriculosService } from '../../pages/user/curriculo.service';
 
 @Component({
   selector: 'app-aside',

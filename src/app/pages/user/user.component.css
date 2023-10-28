@@ -21,7 +21,7 @@ label{
 .animated_background {
   height: 900px;
   display: flex;
-  
+
   justify-content: center;
   align-items: center;
   background: linear-gradient(-45deg, #ee7752, #9e2020, #23a6d5, #23d5ab);
@@ -39,4 +39,13 @@ label{
 h1{
   font-weight: 600;
   padding-top: 30px;
+}
+.has-error input {
+  border-color: #ff0000; /* Borda vermelha para campos inválidos */
+}
+
+.error-message {
+  color: #ff0000; /* Cor do texto da mensagem de erro */
+  font-size: 12px; /* Tamanho da fonte da mensagem de erro */
+  margin-top: 5px; /* Espaçamento acima da mensagem de erro */
 }

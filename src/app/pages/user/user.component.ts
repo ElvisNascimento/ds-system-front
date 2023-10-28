@@ -1,10 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {
-  FormArray,
-  FormControl,
-  FormGroup,
-  Validators,
-} from '@angular/forms';
+import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CurriculosService } from './curriculo.service';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -15,27 +10,34 @@ import { AuthService } from 'src/app/auth/auth.service';
 })
 export class UserComponent implements OnInit {
   public curriculo: FormGroup = new FormGroup({
-    'name': new FormControl('', [
+    name: new FormControl(this.authService.setUserName(), [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(50),
     ]),
-    'cpf': new FormControl('', [Validators.required, this.validarCPF]),
-    'born': new FormControl(''),
-    'email': new FormControl('', [Validators.required, Validators.email]),
-    'phone': new FormControl('', [
+    cpf: new FormControl('', [Validators.required, this.validarCPF]),
+    born: new FormControl(''),
+    email: new FormControl(this.authService.setUserEmail(), [
+      Validators.required,
+      Validators.email,
+    ]),
+    phone: new FormControl('', [
       Validators.required,
       Validators.minLength(11),
       Validators.maxLength(11),
     ]),
-    'education': new FormControl(''),
-    'func': new FormControl(''),
-    'skills': new FormArray([this.createCompetencia()]),
+    education: new FormControl(''),
+    func: new FormControl(''),
+    skills: new FormArray([this.createCompetencia()]),
   });
 
-  loggedInUser: string = this.authService.setLoggedInUser();
+  userName: string = this.authService.setUserName();
+  userEmail: string = this.authService.setUserEmail();
 
-  constructor(private authService: AuthService , private curriculosService: CurriculosService) { }
+  constructor(
+    private authService: AuthService,
+    private curriculosService: CurriculosService
+  ) {}
 
   mostrarFormulario = false;
   curriculosCadastrados: any[] = [];
@@ -50,9 +52,8 @@ export class UserComponent implements OnInit {
     this.mostrarFormulario = true;
   }
 
-
   get skills() {
-    return (this.curriculo.get('skills') as FormArray);
+    return this.curriculo.get('skills') as FormArray;
   }
 
   addCompetencia() {
@@ -65,9 +66,9 @@ export class UserComponent implements OnInit {
 
   createCompetencia() {
     return new FormGroup({
-      'name': new FormControl(''),
-      'level': new FormControl(''),
-      'description': new FormControl(''),
+      name: new FormControl(''),
+      level: new FormControl(''),
+      description: new FormControl(''),
     });
   }
 
@@ -75,19 +76,24 @@ export class UserComponent implements OnInit {
     const dataValues = this.curriculo.value;
     console.log(dataValues);
 
-    this.curriculosService.registerCurriculo(dataValues)
-      .subscribe(
-        response => {
-          console.log('Usuário registrado com sucesso!', response);
-          // Fazer algo aqui após o registro bem-sucedido, se necessário.
-        },
-        error => {
-          console.error('Erro ao registrar usuário:', error);
-          window.alert(error.error?.message || 'Erro ao registrar usuário');
-        }
-      );
+    this.curriculosService.registerCurriculo(dataValues).subscribe(
+      (response) => {
+        console.log('Usuário registrado com sucesso!', response);
+        // Fazer algo aqui após o registro bem-sucedido, se necessário.
+      },
+      (error) => {
+        console.error('Erro ao registrar usuário:', error);
+        window.alert(error.error?.message || 'Erro ao registrar usuário');
+      }
+    );
   }
+  onBlur(fieldName: string) {
+    const control = this.curriculo.get(fieldName);
 
+    if (control?.valid) {
+      control?.markAsUntouched();
+    }
+  }
 
   validarCPF(control: FormControl): { [key: string]: any } | null {
     let cpf = control.value;
@@ -99,11 +105,11 @@ export class UserComponent implements OnInit {
     cpf = cpf.replace(/[^\d]/g, ''); // Remove caracteres não numéricos
 
     if (cpf.length !== 11) {
-      return { 'cpfInvalido': true };
+      return { cpfInvalido: true };
     }
 
     if (/^(\d)\1+$/.test(cpf)) {
-      return { 'cpfInvalido': true };
+      return { cpfInvalido: true };
     }
 
     let soma = 0;
@@ -120,7 +126,7 @@ export class UserComponent implements OnInit {
     }
 
     if (resto !== parseInt(cpf.substring(9, 10), 10)) {
-      return { 'cpfInvalido': true };
+      return { cpfInvalido: true };
     }
 
     soma = 0;
@@ -136,10 +142,9 @@ export class UserComponent implements OnInit {
     }
 
     if (resto !== parseInt(cpf.substring(10, 11), 10)) {
-      return { 'cpfInvalido': true };
+      return { cpfInvalido: true };
     }
 
     return null;
   }
-
 }

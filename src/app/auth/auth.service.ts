@@ -1,7 +1,7 @@
 // auth.service.ts
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { BehaviorSubject, Observable, catchError, throwError } from 'rxjs';
+import { catchError, throwError } from 'rxjs';
 import jwt_decode from "jwt-decode";
 import { Router } from '@angular/router';
 
@@ -12,7 +12,8 @@ export class AuthService {
   private apiUrl = 'http://localhost:3000';
   constructor(private http: HttpClient, private router: Router) { }
 
-  public username: string = '';
+  public userName: string = '';
+  public userEmail: string = '';
 
   login(credentials: any) {
     this.http.post(`${this.apiUrl}/login`, credentials).subscribe({
@@ -21,8 +22,9 @@ export class AuthService {
           const token = response.access_token;
           localStorage.setItem('token', token);
           const decodedToken: any = jwt_decode(token);
-          this.username = decodedToken.name;
-          console.log(this.setLoggedInUser());
+          this.userName = decodedToken.name;
+          this.userEmail = decodedToken.email;
+          console.log(this.setUserName());
 
 
           if (decodedToken.admin) {
@@ -38,12 +40,11 @@ export class AuthService {
   }
 
 
-  private loggedInUserSubject = new BehaviorSubject<string>('');
-
-  loggedInUser$ = this.loggedInUserSubject.asObservable();
-
-  setLoggedInUser():string{
-    return this.username;
+  setUserName():string{
+    return this.userName;
+  }
+  setUserEmail():string{
+    return this.userEmail;
   }
 
   register(newUserCredentials: any): void {

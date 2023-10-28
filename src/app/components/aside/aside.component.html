@@ -8,13 +8,26 @@
       </span>
       <h3>Users</h3>
     </a>
+
     <a href="admin">
       <span class="material-icons-sharp">
         description
       </span>
       <h3>Currículos</h3>
-      <span class="message-count">{{ getQuantCurriculos() }}</span>
+      <div class="circulo">
+        <span class="message-count">{{ getQuantCurriculos() }}</span>
+      </div>
     </a>
+
+    <a href="analytics">
+      <span class="material-icons-sharp">
+        query_stats
+      </span>
+      <h3>Analytics</h3>
+    </a>
+
+  </div>
+  <div>
     <button class="btn btn-danger d-flex justify-content-center align-items-center" (click)="logout()">
       <span class="material-icons-sharp mb-2 p-2">
         logout

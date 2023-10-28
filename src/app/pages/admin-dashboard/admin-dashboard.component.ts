@@ -12,7 +12,7 @@ import { AuthService } from 'src/app/auth/auth.service';
 export class AdminDashboardComponent implements OnInit {
   curriculoSelecionado: any = null
   curriculos: any[] = [];
-  loggedInUser: string = this.authService.setLoggedInUser();
+  loggedInUser: string = this.authService.setUserName();
 
   constructor(private curriculosService: CurriculosService,
     private authService: AuthService) { }
@@ -23,7 +23,6 @@ export class AdminDashboardComponent implements OnInit {
       this.curriculosService.getCurriculos().subscribe(
         (data) => {
           this.curriculos = data.map(curriculo => {
-            // Aqui você pode descompactar a propriedade 'skills' se for necessário
             return {
               ...curriculo,
               skills: curriculo.skills.map((skill: { name: any; }) => skill.name)

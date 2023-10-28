@@ -2,41 +2,48 @@
 <app-header></app-header>
 <div class="d-flex justify-content-center align-items-center p-4">
   <div class="d-flex justify-content-center flex-column align-items-center p-4">
-    <h1>Welcome, {{ loggedInUser }}!</h1>
+    <h1>Welcome, {{ userName }}!</h1>
     <button class="btn btn-primary" (click)="novoCurriculo()">Novo currículo</button>
   </div>
 </div>
 <div *ngIf="mostrarFormulario" class="row animated_background d-flex justify-content-center">
   <form [formGroup]="curriculo" class="col-6 gap-2 text-center d-flex flex-column align-items-center">
     <h1>Criar Um Novo Currículo</h1>
-    <div class="form-group">
+
+    <div class="form-group" [class.has-error]="curriculo.get('name')?.invalid && curriculo.get('name')?.touched && !curriculo.get('name')?.valid">
       <label for="name">Nome Completo:</label>
-      <input class="form-control" formControlName="name" type="text" id="name" name="name">
+      <input class="form-control" formControlName="name" type="text" (blur)="onBlur('name')" id="name" name="name">
+      <div *ngIf="curriculo.get('name')?.invalid && curriculo.get('name')?.touched && !curriculo.get('name')?.valid" class="error-message">Campo obrigatório.</div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" [class.has-error]="curriculo.get('cpf')?.invalid && curriculo.get('cpf')?.touched">
       <label for="cpf">CPF:</label>
-      <input class="form-control" formControlName="cpf" mask="000.000.000-00" type="text" id="cpf" name="cpf">
+      <input class="form-control" formControlName="cpf" mask="000.000.000-00" type="text" (blur)="onBlur('cpf')" id="cpf" name="cpf">
+      <div *ngIf="curriculo.get('cpf')?.invalid && curriculo.get('cpf')?.touched" class="error-message">Campo obrigatório.</div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" [class.has-error]="curriculo.get('email')?.invalid && curriculo.get('email')?.touched">
       <label for="email">E-mail:</label>
-      <input class="form-control" formControlName="email" type="email" id="email" name="email">
+      <input class="form-control" formControlName="email" type="email" (blur)="onBlur('email')" id="email" name="email" placeholder={{userEmail}} value={{userEmail}}>
+      <div *ngIf="curriculo.get('email')?.invalid && curriculo.get('email')?.touched" class="error-message">Campo obrigatório.</div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" [class.has-error]="curriculo.get('phone')?.invalid && curriculo.get('phone')?.touched">
       <label for="phone">Telefone:</label>
-      <input class="form-control" formControlName="phone" mask="(00)00000.0000" type="tel" id="phone" name="phone">
+      <input class="form-control" formControlName="phone" mask="(00)00000.0000" type="tel" (blur)="onBlur('phone')" id="phone" name="phone">
+      <div *ngIf="curriculo.get('phone')?.invalid && curriculo.get('phone')?.touched" class="error-message">Campo obrigatório.</div>
     </div>
+
     <div class="d-flex w-100">
-      <div class="form-group ">
+      <div class="form-group" [class.has-error]="curriculo.get('born')?.invalid && curriculo.get('born')?.touched">
         <label for="born">Data de Nascimento:</label>
-        <input class="form-control text-center" formControlName="born" type="date" id="born" name="born" required>
+        <input class="form-control text-center" formControlName="born" type="date" (blur)="onBlur('born')" id="born" name="born" required>
+        <div *ngIf="curriculo.get('born')?.invalid && curriculo.get('born')?.touched" class="error-message">Campo obrigatório.</div>
       </div>
 
-      <div class="form-group">
+      <div class="form-group" [class.has-error]="curriculo.get('education')?.invalid && curriculo.get('education')?.touched">
         <label for="education">Escolaridade:</label>
-        <select class="form-control text-center" formControlName="education" id="education" name="education" required>
+        <select class="form-control text-center" formControlName="education" (blur)="onBlur('education')" id="education" name="education" required>
           <option value="Analfabeto">Analfabeto</option>
           <option value="Fundamental Completo">Fundamental Completo</option>
           <option value="Médio Incompleto">Médio Incompleto</option>
@@ -47,12 +54,14 @@
           <option value="Doutorado">Doutorado</option>
           <option value="Ignorado">Ignorado</option>
         </select>
+        <div *ngIf="curriculo.get('education')?.invalid && curriculo.get('education')?.touched" class="error-message">Campo obrigatório.</div>
       </div>
     </div>
 
-    <div class="form-group">
+    <div class="form-group" [class.has-error]="curriculo.get('func')?.invalid && curriculo.get('func')?.touched">
       <label for="func">Função:</label>
-      <input class="form-control" formControlName="func" type="text" id="func" name="func" required>
+      <input class="form-control" formControlName="func" type="text" (blur)="onBlur('func')" id="func" name="func" required>
+      <div *ngIf="curriculo.get('func')?.invalid && curriculo.get('func')?.touched" class="error-message">Campo obrigatório.</div>
     </div>
 
     <div class="form-group">

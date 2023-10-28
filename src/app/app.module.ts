@@ -21,7 +21,7 @@ import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { JwtModule } from '@auth0/angular-jwt';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { DetalhesCurriculoComponent } from './detalhes-curriculo/detalhes-curriculo.component';
-import { AsideComponent } from './aside/aside.component';
+import { AsideComponent } from './components/aside/aside.component';
 
 
 @NgModule({
