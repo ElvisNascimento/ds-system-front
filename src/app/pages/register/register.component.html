@@ -21,7 +21,11 @@
             <input type="password" class="form-control" id="password" formControlName="password"
               placeholder="Digite sua senha">
           </div>
-          <button type="button" class="btn text-white" (click)="register()">Cadastrar</button>
+
+            <p-toast></p-toast>
+
+          <button type="button" pButton pRipple label="Show" class="p-button-success" class="btn text-white"
+            (click)="register()">Cadastrar</button>
         </form>
       </div>
       <div class="card-footer">

@@ -1,7 +1,7 @@
 <mat-toolbar class="header mat-elevation-z3 w-100">
   <span>
     <a href="/">
-      <img routerLink="/" class="logo" src="assets/images/logo.png" alt="logo">
+      <img (click)="logout()" class="logo" src="assets/images/logo.png" alt="logo">
     </a>
   </span>
   <span  [ngClass]="{'esconder-elemento': condicao}" class="title-group">

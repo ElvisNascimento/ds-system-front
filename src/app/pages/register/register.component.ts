@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+import { MessageService } from 'primeng/api';
 import { slideInLeftAnimation, slideInLeftAnimationBack, slideInRightAnimation, slideInRightAnimationBack, slideOutLeftAnimation, slideOutRightAnimation } from 'src/app/animations';
 import { AuthService } from 'src/app/auth/auth.service';
 
@@ -8,12 +9,13 @@ import { AuthService } from 'src/app/auth/auth.service';
   selector: 'app-register',
   templateUrl: './register.component.html',
   styleUrls: ['./register.component.css'],
+  providers: [MessageService],
   animations: [slideInLeftAnimation, slideOutRightAnimation, slideOutLeftAnimation, slideInRightAnimation, slideInLeftAnimationBack, slideInRightAnimationBack]
 })
 export class RegisterComponent {
 
   constructor(
-    private authService: AuthService, private router: Router) {
+    private authService: AuthService, private router: Router, private messageService: MessageService) {
   }
 
   newUserCredentials = new FormGroup({
@@ -24,7 +26,8 @@ export class RegisterComponent {
 
   register() {
     const formValues = this.newUserCredentials.value;
-    return this.authService.register(formValues);
+    this.messageService.add({ severity: 'success', summary: 'Success', detail: 'Message Content' });
+    return ( this.authService.register(formValues) ,this.router.navigate(['/login']))
   }
 
   navegarParaLoginComAtraso() {

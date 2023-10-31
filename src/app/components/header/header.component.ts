@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -8,4 +9,10 @@ import { Component } from '@angular/core';
 export class HeaderComponent {
   condicao: boolean = true;
 
+  constructor( private router: Router)
+{}
+  logout(): void {
+    localStorage.removeItem('token');
+    this.router.navigate(['/login']);
+  }
 }

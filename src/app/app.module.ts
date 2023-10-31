@@ -22,6 +22,7 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
 import { DetalhesCurriculoComponent } from './detalhes-curriculo/detalhes-curriculo.component';
 import { AsideComponent } from './components/aside/aside.component';
+import { ToastModule } from 'primeng/toast';
 
 
 @NgModule({
@@ -51,6 +52,7 @@ import { AsideComponent } from './components/aside/aside.component';
     ReactiveFormsModule,
     NgxMaskDirective,
     NgxMaskPipe,
+    ToastModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,

@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CurriculosService } from './curriculo.service';
 import { AuthService } from 'src/app/auth/auth.service';
+import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-user',
@@ -9,7 +10,7 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
-  
+
   curriculos: any[] = [];
 
   public curriculo: FormGroup = new FormGroup({
@@ -100,7 +101,6 @@ export class UserComponent implements OnInit {
   }
 
   verMesusCurriculo() {
-
     this.curriculosService.getCurriculosByEmail(this.userEmail).subscribe(
       (data: any) => {
         console.log('data',data);
