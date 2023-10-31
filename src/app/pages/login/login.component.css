@@ -3,30 +3,60 @@
 }
 
 .container {
+  position: relative;
   margin-top: 20px;
-  width: 90%;
+  width: 100%;
   height: auto;
 }
 
+.container::before {
+  content: "";
+  background-image: url("../../../assets/images/login.jpg");
+  background-size: cover;
+  background-position: center;
+  filter: blur(5px);
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -1; /* Coloca a camada de sobreposição atrás do conteúdo */
+}
+
+.btn{
+  background-color: #465A65;
+  color: #27DEC0;
+}
+
 .card-header {
-  border-radius: 10px 0 0 10px;
+  color:#27DEC0 ;
+  background-color: #465A65;
+  border-radius: 10px;
   height: 38px;
   padding: 2%;
   margin: 2% 0 2% 0;
 }
 
 .backholder {
-  background-color: rgb(185, 185, 185);
   border-radius: 0 10px 10px 0;
+  /* border: 1px solid rgb(187, 187, 187); */
   width: 400px;
   height: 400px;
   max-width: 700px;
   z-index: 1;
 }
+.backholder img{
+  border-radius: 0 10px 10px 0;
+  width: 100%;
+  height: auto;
+}
 
 .login-form {
+  font-weight: 500;
   padding: 20px;
-  border: 1px solid rgb(187, 187, 187);
+  text-align: center;
+  /* border: 1px solid rgb(187, 187, 187); */
+  background-color: rgba(142, 142, 142, 0.379);
   border-radius: 10px 0 0 10px;
   width: 280px;
   height: 400px;
@@ -54,6 +84,7 @@
   .login-form {
     padding: 20px;
     border: 1px solid rgb(187, 187, 187);
+    background-color: rgba(142, 142, 142, 0.379);
     border-radius: 10px;
     width: 280px;
     height: 400px;

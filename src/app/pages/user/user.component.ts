@@ -9,6 +9,9 @@ import { AuthService } from 'src/app/auth/auth.service';
   styleUrls: ['./user.component.css'],
 })
 export class UserComponent implements OnInit {
+  
+  curriculos: any[] = [];
+
   public curriculo: FormGroup = new FormGroup({
     name: new FormControl(this.authService.setUserName(), [
       Validators.required,
@@ -31,8 +34,8 @@ export class UserComponent implements OnInit {
     skills: new FormArray([this.createCompetencia()]),
   });
 
-  userName: string = this.authService.setUserName();
-  userEmail: string = this.authService.setUserEmail();
+  userName: string = '';
+  userEmail: string = '';
 
   constructor(
     private authService: AuthService,
@@ -43,10 +46,10 @@ export class UserComponent implements OnInit {
   curriculosCadastrados: any[] = [];
 
   ngOnInit(): void {
-    this.curriculosService.getCurriculoSelecionado().subscribe((data: any) => {
-      this.curriculosCadastrados = data;
-    });
+    this.userName = this.authService.setUserName();
+    this.userEmail = this.authService.setUserEmail();
   }
+
 
   novoCurriculo() {
     this.mostrarFormulario = true;
@@ -87,6 +90,7 @@ export class UserComponent implements OnInit {
       }
     );
   }
+
   onBlur(fieldName: string) {
     const control = this.curriculo.get(fieldName);
 
@@ -94,6 +98,25 @@ export class UserComponent implements OnInit {
       control?.markAsUntouched();
     }
   }
+
+  verMesusCurriculo() {
+
+    this.curriculosService.getCurriculosByEmail(this.userEmail).subscribe(
+      (data: any) => {
+        console.log('data',data);
+        this.curriculos = data.map((curriculo: any) => {
+          return {
+            ...curriculo,
+            skills: curriculo.skills?.map((skill: { name: any }) => skill.name),
+          };
+        });
+      },
+      (error) => {
+        console.error('Erro ao obter os currículos:', error);
+      }
+    );
+  }
+
 
   validarCPF(control: FormControl): { [key: string]: any } | null {
     let cpf = control.value;

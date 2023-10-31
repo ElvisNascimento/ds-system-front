@@ -1,97 +1,141 @@
 <!-- dashboard.component.html -->
 <app-header></app-header>
-<div class="d-flex justify-content-center align-items-center p-4">
+<div class="d-flex flex-column justify-content-center align-items-center p-4">
   <div class="d-flex justify-content-center flex-column align-items-center p-4">
     <h1>Welcome, {{ userName }}!</h1>
-    <button class="btn btn-primary" (click)="novoCurriculo()">Novo currículo</button>
+    <div class="d-flex">
+      <button class="btn me-2" (click)="verMesusCurriculo()">Ver meus currículos</button>
+      <button class="btn" (click)="novoCurriculo()">Novo currículo</button>
+    </div>
   </div>
-</div>
-<div *ngIf="mostrarFormulario" class="row animated_background d-flex justify-content-center">
-  <form [formGroup]="curriculo" class="col-6 gap-2 text-center d-flex flex-column align-items-center">
-    <h1>Criar Um Novo Currículo</h1>
+  <div *ngIf="mostrarFormulario" class="row animated_background d-flex justify-content-center w-100">
+    <form [formGroup]="curriculo" class="col-6 gap-2 text-center d-flex flex-column align-items-center">
+      <h1>Criar Novo Currículo</h1>
 
-    <div class="form-group" [class.has-error]="curriculo.get('name')?.invalid && curriculo.get('name')?.touched && !curriculo.get('name')?.valid">
-      <label for="name">Nome Completo:</label>
-      <input class="form-control" formControlName="name" type="text" (blur)="onBlur('name')" id="name" name="name">
-      <div *ngIf="curriculo.get('name')?.invalid && curriculo.get('name')?.touched && !curriculo.get('name')?.valid" class="error-message">Campo obrigatório.</div>
-    </div>
-
-    <div class="form-group" [class.has-error]="curriculo.get('cpf')?.invalid && curriculo.get('cpf')?.touched">
-      <label for="cpf">CPF:</label>
-      <input class="form-control" formControlName="cpf" mask="000.000.000-00" type="text" (blur)="onBlur('cpf')" id="cpf" name="cpf">
-      <div *ngIf="curriculo.get('cpf')?.invalid && curriculo.get('cpf')?.touched" class="error-message">Campo obrigatório.</div>
-    </div>
-
-    <div class="form-group" [class.has-error]="curriculo.get('email')?.invalid && curriculo.get('email')?.touched">
-      <label for="email">E-mail:</label>
-      <input class="form-control" formControlName="email" type="email" (blur)="onBlur('email')" id="email" name="email" placeholder={{userEmail}} value={{userEmail}}>
-      <div *ngIf="curriculo.get('email')?.invalid && curriculo.get('email')?.touched" class="error-message">Campo obrigatório.</div>
-    </div>
-
-    <div class="form-group" [class.has-error]="curriculo.get('phone')?.invalid && curriculo.get('phone')?.touched">
-      <label for="phone">Telefone:</label>
-      <input class="form-control" formControlName="phone" mask="(00)00000.0000" type="tel" (blur)="onBlur('phone')" id="phone" name="phone">
-      <div *ngIf="curriculo.get('phone')?.invalid && curriculo.get('phone')?.touched" class="error-message">Campo obrigatório.</div>
-    </div>
-
-    <div class="d-flex w-100">
-      <div class="form-group" [class.has-error]="curriculo.get('born')?.invalid && curriculo.get('born')?.touched">
-        <label for="born">Data de Nascimento:</label>
-        <input class="form-control text-center" formControlName="born" type="date" (blur)="onBlur('born')" id="born" name="born" required>
-        <div *ngIf="curriculo.get('born')?.invalid && curriculo.get('born')?.touched" class="error-message">Campo obrigatório.</div>
+      <div class="form-group"
+        [class.has-error]="curriculo.get('name')?.invalid && curriculo.get('name')?.touched && !curriculo.get('name')?.valid">
+        <label for="name">Nome Completo:</label>
+        <input class="form-control" formControlName="name" type="text" (blur)="onBlur('name')" id="name" name="name">
+        <div *ngIf="curriculo.get('name')?.invalid && curriculo.get('name')?.touched && !curriculo.get('name')?.valid"
+          class="error-message">Campo obrigatório.</div>
       </div>
 
-      <div class="form-group" [class.has-error]="curriculo.get('education')?.invalid && curriculo.get('education')?.touched">
-        <label for="education">Escolaridade:</label>
-        <select class="form-control text-center" formControlName="education" (blur)="onBlur('education')" id="education" name="education" required>
-          <option value="Analfabeto">Analfabeto</option>
-          <option value="Fundamental Completo">Fundamental Completo</option>
-          <option value="Médio Incompleto">Médio Incompleto</option>
-          <option value="Médio Completo" selected>Médio Completo</option>
-          <option value="Superior Incompleto">Superior Incompleto</option>
-          <option value="Superior Completo">Superior Completo</option>
-          <option value="Mestrado">Mestrado</option>
-          <option value="Doutorado">Doutorado</option>
-          <option value="Ignorado">Ignorado</option>
-        </select>
-        <div *ngIf="curriculo.get('education')?.invalid && curriculo.get('education')?.touched" class="error-message">Campo obrigatório.</div>
+      <div class="form-group" [class.has-error]="curriculo.get('cpf')?.invalid && curriculo.get('cpf')?.touched">
+        <label for="cpf">CPF:</label>
+        <input class="form-control" formControlName="cpf" mask="000.000.000-00" type="text" (blur)="onBlur('cpf')"
+          id="cpf" name="cpf">
+        <div *ngIf="curriculo.get('cpf')?.invalid && curriculo.get('cpf')?.touched" class="error-message">Campo
+          obrigatório.</div>
       </div>
-    </div>
 
-    <div class="form-group" [class.has-error]="curriculo.get('func')?.invalid && curriculo.get('func')?.touched">
-      <label for="func">Função:</label>
-      <input class="form-control" formControlName="func" type="text" (blur)="onBlur('func')" id="func" name="func" required>
-      <div *ngIf="curriculo.get('func')?.invalid && curriculo.get('func')?.touched" class="error-message">Campo obrigatório.</div>
-    </div>
+      <div class="form-group" [class.has-error]="curriculo.get('email')?.invalid && curriculo.get('email')?.touched">
+        <label for="email">E-mail:</label>
+        <input class="form-control" formControlName="email" type="email" (blur)="onBlur('email')" id="email"
+          name="email" placeholder={{userEmail}} value={{userEmail}}>
+        <div *ngIf="curriculo.get('email')?.invalid && curriculo.get('email')?.touched" class="error-message">Campo
+          obrigatório.</div>
+      </div>
 
-    <div class="form-group">
-      <label for="skills">Lista de Competências:</label>
-      <div class="skills">
-        <div formArrayName="skills">
-          <div *ngFor="let skill of skills.controls; let i = index">
-            <div [formGroupName]="i">
-              <label class="text-left" for="skills">Competência</label>
-              <div class="d-flex mb-2">
-                <input class="form-control w-50" formControlName="name" type="text" id="skills"
-                  placeholder="Competência">
-                <select class="form-control w-50" formControlName="level" name="proficiencia">
-                  <option value="Básico">Básico</option>
-                  <option value="Intermediário">Intermediário</option>
-                  <option value="Avançado">Avançado</option>
-                </select>
-              </div>
-              <div class="d-flex">
-                <input class="form-control w-75" type="text" formControlName="description"
-                  placeholder="Descrição da Competência">
-                <button class="btn btn-danger w-25" (click)="removeCompetencia(i)">Remover</button>
+      <div class="form-group" [class.has-error]="curriculo.get('phone')?.invalid && curriculo.get('phone')?.touched">
+        <label for="phone">Telefone:</label>
+        <input class="form-control" formControlName="phone" mask="(00)00000.0000" type="tel" (blur)="onBlur('phone')"
+          id="phone" name="phone">
+        <div *ngIf="curriculo.get('phone')?.invalid && curriculo.get('phone')?.touched" class="error-message">Campo
+          obrigatório.</div>
+      </div>
+
+      <div class="d-flex w-100">
+        <div class="form-group" [class.has-error]="curriculo.get('born')?.invalid && curriculo.get('born')?.touched">
+          <label for="born">Data de Nascimento:</label>
+          <input class="form-control text-center" formControlName="born" type="date" (blur)="onBlur('born')" id="born"
+            name="born" required>
+          <div *ngIf="curriculo.get('born')?.invalid && curriculo.get('born')?.touched" class="error-message">Campo
+            obrigatório.</div>
+        </div>
+
+        <div class="form-group"
+          [class.has-error]="curriculo.get('education')?.invalid && curriculo.get('education')?.touched">
+          <label for="education">Escolaridade:</label>
+          <select class="form-control text-center" formControlName="education" (blur)="onBlur('education')"
+            id="education" name="education" required>
+            <option value="Analfabeto">Analfabeto</option>
+            <option value="Fundamental Completo">Fundamental Completo</option>
+            <option value="Médio Incompleto">Médio Incompleto</option>
+            <option value="Médio Completo" selected>Médio Completo</option>
+            <option value="Superior Incompleto">Superior Incompleto</option>
+            <option value="Superior Completo">Superior Completo</option>
+            <option value="Mestrado">Mestrado</option>
+            <option value="Doutorado">Doutorado</option>
+            <option value="Ignorado">Ignorado</option>
+          </select>
+          <div *ngIf="curriculo.get('education')?.invalid && curriculo.get('education')?.touched" class="error-message">
+            Campo obrigatório.</div>
+        </div>
+      </div>
+
+      <div class="form-group" [class.has-error]="curriculo.get('func')?.invalid && curriculo.get('func')?.touched">
+        <label for="func">Função:</label>
+        <input class="form-control" formControlName="func" type="text" (blur)="onBlur('func')" id="func" name="func"
+          required>
+        <div *ngIf="curriculo.get('func')?.invalid && curriculo.get('func')?.touched" class="error-message">Campo
+          obrigatório.</div>
+      </div>
+
+      <div class="form-group">
+        <label for="skills">Lista de Competências:</label>
+        <div class="skills">
+          <div formArrayName="skills">
+            <div *ngFor="let skill of skills.controls; let i = index">
+              <div [formGroupName]="i">
+                <label class="text-left" for="skills">Competência</label>
+                <div class="d-flex mb-2">
+                  <input class="form-control w-50" formControlName="name" type="text" id="skills"
+                    placeholder="Competência">
+                  <select class="form-control w-50" formControlName="level" name="proficiencia">
+                    <option value="Básico">Básico</option>
+                    <option value="Intermediário">Intermediário</option>
+                    <option value="Avançado">Avançado</option>
+                  </select>
+                </div>
+                <div class="d-flex">
+                  <input class="form-control w-75" type="text" formControlName="description"
+                    placeholder="Descrição da Competência">
+                  <button class="btn btn-danger w-25" (click)="removeCompetencia(i)">Remover</button>
+                </div>
               </div>
             </div>
           </div>
         </div>
+        <button class="btn btn-info mt-2" (click)="addCompetencia()">Adicionar outra competência?</button>
       </div>
-      <button class="btn btn-info mt-2" (click)="addCompetencia()">Adicionar outra competência?</button>
+      <button type="button" class="btn btn-primary btn_save mb-4" (click)="submitCurriculo()">Salvar
+        Currículo</button>
+    </form>
+  </div>
+  <div class="accordion accordion-flush w-100 mb-4" id="accordionFlushExample">
+    <div class="accordion-item" *ngFor="let curriculo of curriculos; let i = index">
+      <h2 class="accordion-header" id="{{ curriculo.id }}">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#flush-collapse' + i" aria-expanded="false"
+          [attr.aria-controls]="'flush-collapse' + i">
+          {{ curriculo.name }}
+        </button>
+      </h2>
+      <div [id]="'flush-collapse' + i" class="accordion-collapse collapse" aria-labelledby="i"
+        [attr.data-bs-parent]="'#accordionFlushExample'">
+        <div class="accordion-body">
+          <span>Nome: </span> <span> {{ curriculo.name }} </span> <br />
+          <span>Email: </span> <span> {{ curriculo.email }}</span><br />
+          <span>CPF: </span> <span> {{ curriculo.cpf }}</span><br />
+          <span>Telefone: </span> <span> {{ curriculo.phone }}</span><br />
+          <span>Data de Nascimento: </span> <span> {{ curriculo.born }}</span><br />
+          <span>Escolaridade: </span> <span> {{ curriculo.education }}</span><br />
+          <span>Função: </span> <span> {{ curriculo.func }}</span><br />
+          <span>Competências: </span> <span> {{curriculo.skills}}</span><br />
+        </div>
+      </div>
     </div>
-    <button type="button" class="btn btn-primary btn_save mb-4" (click)="submitCurriculo()">Salvar Currículo</button>
-  </form>
+  </div>
 </div>
+<div class="mb-4 w-100 h-25"></div>
 <app-footer></app-footer>

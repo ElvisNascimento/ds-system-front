@@ -2,7 +2,7 @@
 <div class="container d-flex justify-content-center align-items-center mt-4">
   <div  [@slideOutRightAnimation] [@slideInRightAnimation] >
     <div class="login-form">
-      <div class="card-header bg-primary text-white">
+      <div class="card-header">
         <h3>Login</h3>
       </div>
       <div class="card-body">
@@ -16,7 +16,7 @@
             <input type="password" class="form-control" id="password" formControlName="password"
               placeholder="Digite sua senha">
           </div>
-          <button type="button" class="btn btn-primary" (click)="login()">Entrar</button>
+          <button type="button" class="btn" (click)="login()">Entrar</button>
         </form>
       </div>
       <div class="card-footer">
@@ -26,7 +26,9 @@
     </div>
   </div>
   <div [@slideInLeftAnimationBack]>
-    <div class="backholder"></div>
+    <div class="backholder">
+      <img src="../../../assets/images/login.jpg" alt="">
+    </div>
   </div>
 </div>
 <app-footer></app-footer>

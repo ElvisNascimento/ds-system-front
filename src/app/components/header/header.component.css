@@ -9,6 +9,7 @@
   text-decoration: none;
 }
 .header .logo{
+  filter: hue-rotate(320deg);
   max-height: 60px;
   width: auto;
 }
