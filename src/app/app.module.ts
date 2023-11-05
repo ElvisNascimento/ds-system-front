@@ -3,7 +3,7 @@ import { BrowserModule} from '@angular/platform-browser';
 import { HttpClientModule } from '@angular/common/http';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HeaderComponent } from './components/header/header.component';
 import { FooterComponent } from './components/footer/footer.component';
@@ -19,10 +19,13 @@ import { LoginComponent } from './pages/login/login.component';
 import { UserComponent } from './pages/user/user.component';
 import { NgxMaskDirective, NgxMaskPipe, provideNgxMask } from 'ngx-mask';
 import { JwtModule } from '@auth0/angular-jwt';
-import { AdminDashboardComponent } from './pages/admin-dashboard/admin-dashboard.component';
-import { DetalhesCurriculoComponent } from './detalhes-curriculo/detalhes-curriculo.component';
 import { AsideComponent } from './components/aside/aside.component';
 import { ToastModule } from 'primeng/toast';
+import { CurriculosComponent } from './components/curriculos/curriculos.component';
+import { UsersComponent } from './components/users/users.component';
+import { AnalyticsComponent } from './components/analytics/analytics.component';
+import { AdminLayoutComponent } from './pages/admin-layout/admin-layout.component';
+import { ChartModule } from 'primeng/chart';
 
 
 @NgModule({
@@ -34,9 +37,11 @@ import { ToastModule } from 'primeng/toast';
     RegisterComponent,
     LoginComponent,
     UserComponent,
-    AdminDashboardComponent,
-    DetalhesCurriculoComponent,
-    AsideComponent
+    AsideComponent,
+    CurriculosComponent,
+    UsersComponent,
+    AnalyticsComponent,
+    AdminLayoutComponent
   ],
   imports: [
     BrowserModule,
@@ -52,12 +57,14 @@ import { ToastModule } from 'primeng/toast';
     ReactiveFormsModule,
     NgxMaskDirective,
     NgxMaskPipe,
+    ChartModule,
+    FormsModule,
     ToastModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: tokenGetter,
-        allowedDomains: ['example.com'], // Domínios permitidos para o token
-        disallowedRoutes: ['http://example.com/api/auth'] // Rotas que não devem incluir o token
+        // allowedDomains: ['example.com'], // Domínios permitidos para o token
+        // disallowedRoutes: ['http://example.com/api/auth'] // Rotas que não devem incluir o token
       }
     })
   ],

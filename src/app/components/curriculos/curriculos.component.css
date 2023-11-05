@@ -1,3 +1,6 @@
+*{
+  box-sizing: border-box;
+}
 .centralizar{
   display: flex;
   flex-direction: column;
@@ -10,7 +13,14 @@ button {
   cursor: pointer;
 }
 .container {
-  margin: 5%;
-  width: 95%;
+  width: 90%;
   margin-bottom: 100px;
+}
+
+button{
+  background-color: #23d5ab;
+  color:#465A65;
+  font-weight: 500;
+  text-align: center;
+
 }

@@ -24,9 +24,15 @@ export class AsideComponent implements OnInit {
 
   logout(): void {
     localStorage.removeItem('token');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
     this.router.navigate(['/login']);
   }
   getQuantCurriculos(): number {
     return this.curriculos.length;
   }
+  navegarParaCurriculos() {
+    this.router.navigate(['admin', { outlets: { curriculos: ['curriculos'] } }]);
+  }
+
 }

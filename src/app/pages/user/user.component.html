@@ -4,7 +4,6 @@
   <div class="d-flex justify-content-center flex-column align-items-center p-4">
     <h1>Welcome, {{ userName }}!</h1>
     <div class="d-flex">
-      <button class="btn me-2" (click)="verMesusCurriculo()">Ver meus currículos</button>
       <button class="btn" (click)="novoCurriculo()">Novo currículo</button>
     </div>
   </div>
@@ -113,26 +112,40 @@
     </form>
   </div>
   <div class="accordion accordion-flush w-100 mb-4" id="accordionFlushExample">
-    <div class="accordion-item" *ngFor="let curriculo of curriculos; let i = index">
+    <div class="accordion-item" *ngFor="let curriculo of userCurriculos; let i = index">
       <h2 class="accordion-header" id="{{ curriculo.id }}">
         <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
           [attr.data-bs-target]="'#flush-collapse' + i" aria-expanded="false"
           [attr.aria-controls]="'flush-collapse' + i">
-          {{ curriculo.name }}
+          <div class="d-flex justify-content-between w-100">
+            <div class="mr-auto p-2">
+              <strong>{{ curriculo.name }}</strong>
+            </div>
+            <div class="ml-auto p-2">
+              <strong><span>Status: </span></strong> <span> {{curriculo.status}}</span>
+            </div>
+          </div>
         </button>
       </h2>
       <div [id]="'flush-collapse' + i" class="accordion-collapse collapse" aria-labelledby="i"
         [attr.data-bs-parent]="'#accordionFlushExample'">
         <div class="accordion-body">
-          <span>Nome: </span> <span> {{ curriculo.name }} </span> <br />
-          <span>Email: </span> <span> {{ curriculo.email }}</span><br />
-          <span>CPF: </span> <span> {{ curriculo.cpf }}</span><br />
-          <span>Telefone: </span> <span> {{ curriculo.phone }}</span><br />
-          <span>Data de Nascimento: </span> <span> {{ curriculo.born }}</span><br />
-          <span>Escolaridade: </span> <span> {{ curriculo.education }}</span><br />
-          <span>Função: </span> <span> {{ curriculo.func }}</span><br />
-          <span>Status: </span> <span> {{curriculo.status}}</span><br />
-          <span>Competências: </span> <span> {{curriculo.skills}}</span><br />
+          <strong><span>Nome: </span></strong> <span> {{ curriculo.name }} </span> <br />
+          <strong><span>Email: </span></strong> <span> {{ curriculo.email }}</span><br />
+          <strong><span>CPF: </span></strong> <span> {{ curriculo.cpf }}</span><br />
+          <strong><span>Telefone: </span></strong> <span> {{ curriculo.phone }}</span><br />
+          <strong><span>Data de Nascimento: </span></strong> <span> {{ curriculo.born }}</span><br />
+          <strong><span>Escolaridade: </span></strong> <span> {{ curriculo.education }}</span><br />
+          <strong><span>Função: </span></strong> <span> {{ curriculo.func }}</span><br />
+          <hr>
+          <strong><span>Competências:</span></strong>
+          <div *ngFor="let skill of curriculo.skills">
+            <p><strong>Name:</strong> {{ skill.name }} <br>
+              <strong>Descrição:</strong> {{ skill.description }} <br>
+              <strong>Level:</strong> {{ skill.level }}
+            </p>
+            <hr>
+          </div>
         </div>
       </div>
     </div>

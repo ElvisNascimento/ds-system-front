@@ -6,14 +6,24 @@ import { Observable, catchError, map, throwError } from 'rxjs';
   providedIn: 'root',
 })
 export class CurriculosService {
-  private apiUrl = 'http://localhost:3000/curriculos';
+  private apiUrl = 'http://localhost:3000/curriculos/';
 
   private curriculoSelecionado: any = null;
 
-  constructor(private http: HttpClient) {}
+  curriculoId:any = 0;
+
+  constructor(private http: HttpClient) { }
+
+  ngOnChange(){
+    this.updateCurriculo;
+  }
 
   getCurriculos(): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl);
+  }
+
+  getCurriculosByEmail(userEmail: any): Observable<any[]> {
+    return this.http.get<any[]>(this.apiUrl + userEmail);
   }
 
   registerCurriculo(dados: any): Observable<any> {
@@ -24,22 +34,36 @@ export class CurriculosService {
       })
     );
   }
+
   getQuantidadeCurriculos(): Observable<number> {
     return this.http
       .get<any[]>(this.apiUrl)
       .pipe(map((curriculos: string | any[]) => curriculos.length));
   }
 
-  getCurriculosByEmail(userEmail: string): Observable<any[]> {
-    const emailsFromUser =  this.http.get<any[]>(this.apiUrl +'/'+ userEmail);
-    return emailsFromUser;
-  }
-
-  setCurriculoSelecionado(curriculo: any) {
-    this.curriculoSelecionado = curriculo;
+  setCurriculoSelecionado(curriculoId: any) {
+    return this.curriculoId = curriculoId;
   }
 
   getCurriculoSelecionado() {
+    console.log(this.curriculoSelecionado);
+
     return this.curriculoSelecionado;
+  }
+
+  updateCurriculo(newStatus: string): Observable<any> {
+    const curriculoSelecionado = this.getCurriculoSelecionado(); // Obtenha o currículo selecionado
+
+    if (curriculoSelecionado) {
+      const curriculoAtualizado = {
+        ...curriculoSelecionado,
+        status: newStatus,
+      };
+
+      return this.http.patch(this.apiUrl + curriculoAtualizado.id, curriculoAtualizado);
+    } else {
+      console.error('Nenhum currículo selecionado');
+      return throwError('Nenhum currículo selecionado'); // Retorne um Observable de erro
+    }
   }
 }

@@ -1,0 +1,25 @@
+<div class="container row ">
+  <div class="accordion accordion-flush" id="accordionFlushExample">
+    <div class="accordion-item" *ngFor="let user of users; let i = index">
+      <h2 class="accordion-header" id="{{ user.id }}">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          [attr.data-bs-target]="'#flush-collapse' + i" aria-expanded="false"
+          [attr.aria-controls]="'flush-collapse' + i">
+          <div class="d-flex justify-content-between w-100">
+            <div class="mr-auto p-2">
+              <strong>Usuário :{{user.id}} {{ user.name }}</strong>
+            </div>
+          </div>
+        </button>
+      </h2>
+      <div [id]="'flush-collapse' + i" class="accordion-collapse collapse" aria-labelledby="i"
+        [attr.data-bs-parent]="'#accordionFlushExample'">
+        <div class="accordion-body border mb-2">
+          <strong><span>Nome: </span></strong> <span> {{ user.name }} </span> <br />
+          <strong><span>Email: </span></strong> <span> {{ user.email }}</span><br />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="mb-4 w-100 h-25"></div>

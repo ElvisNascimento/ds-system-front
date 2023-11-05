@@ -28,9 +28,6 @@ card{
   margin: 5px;
 }
 
-
-
-
 .animated_background {
   height: 900px;
   display: flex;
@@ -41,9 +38,6 @@ card{
   background-size: 400% 400%;
   animation: mudarCores 15s ease infinite alternate;
 }
-
-
-
 
 @keyframes mudarCores {
   0% {

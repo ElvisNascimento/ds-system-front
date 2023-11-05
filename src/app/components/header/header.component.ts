@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'src/app/auth/auth.service';
 
 @Component({
   selector: 'app-header',
@@ -9,10 +10,10 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   condicao: boolean = true;
 
-  constructor( private router: Router)
+  constructor(private readonly authService:AuthService)
 {}
-  logout(): void {
-    localStorage.removeItem('token');
-    this.router.navigate(['/login']);
-  }
+logout() {
+  return this.authService.logout();
+}
+
 }

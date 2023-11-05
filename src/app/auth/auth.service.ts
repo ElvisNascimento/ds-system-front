@@ -10,10 +10,13 @@ import { Router } from '@angular/router';
 })
 export class AuthService {
   private apiUrl = 'http://localhost:3000';
-  constructor(private http: HttpClient, private router: Router) { }
-
   public userName: string = '';
   public userEmail: string = '';
+
+  constructor(private http: HttpClient, private router: Router) {
+
+   }
+
 
   login(credentials: any) {
     this.http.post(`${this.apiUrl}/login`, credentials).subscribe({
@@ -24,8 +27,8 @@ export class AuthService {
           const decodedToken: any = jwt_decode(token);
           this.userName = decodedToken.name;
           this.userEmail = decodedToken.email;
-          console.log(this.setUserName());
-
+          localStorage.setItem('userName',this.userName);
+          localStorage.setItem('userEmail',this.userEmail);
 
           if (decodedToken.admin) {
             this.router.navigate(['admin']);
@@ -38,7 +41,9 @@ export class AuthService {
         }
     });
   }
-
+  getAllUsers(){
+    return this.http.get<any[]>(this.apiUrl + '/users');
+  }
 
   setUserName():string{
     return this.userName;
@@ -71,5 +76,12 @@ export class AuthService {
   // Método para verificar se o usuário está autenticado
   isLoggedIn(): boolean {
     return !!localStorage.getItem('token');
+  }
+
+  logout(): void {
+    localStorage.removeItem('token');
+    localStorage.removeItem('userName');
+    localStorage.removeItem('userEmail');
+    this.router.navigate(['/login']);
   }
 }

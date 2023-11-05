@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { FormArray, FormControl, FormGroup, Validators } from '@angular/forms';
 import { CurriculosService } from './curriculo.service';
 import { AuthService } from 'src/app/auth/auth.service';
-import { ToastModule } from 'primeng/toast';
 
 @Component({
   selector: 'app-user',
@@ -12,16 +11,17 @@ import { ToastModule } from 'primeng/toast';
 export class UserComponent implements OnInit {
 
   curriculos: any[] = [];
+  userCurriculos: any[] = [];
 
   public curriculo: FormGroup = new FormGroup({
-    name: new FormControl(this.authService.setUserName(), [
+    name: new FormControl(localStorage.getItem('userName'), [
       Validators.required,
       Validators.minLength(3),
       Validators.maxLength(50),
     ]),
     cpf: new FormControl('', [Validators.required, this.validarCPF]),
     born: new FormControl(''),
-    email: new FormControl(this.authService.setUserEmail(), [
+    email: new FormControl(localStorage.getItem('userEmail'), [
       Validators.required,
       Validators.email,
     ]),
@@ -35,20 +35,50 @@ export class UserComponent implements OnInit {
     skills: new FormArray([this.createCompetencia()]),
   });
 
-  userName: string = '';
-  userEmail: string = '';
+  userName: any;
+  userEmail: any;
+
 
   constructor(
     private authService: AuthService,
     private curriculosService: CurriculosService
-  ) {}
+  ) {
+    this.userName = localStorage.getItem('userName');
+    this.userEmail = localStorage.getItem('userEmail');
+  }
 
   mostrarFormulario = false;
   curriculosCadastrados: any[] = [];
 
   ngOnInit(): void {
-    this.userName = this.authService.setUserName();
-    this.userEmail = this.authService.setUserEmail();
+    this.getCurriculos();
+  }
+
+  getCurriculos() {
+    this.curriculosService.getCurriculos().subscribe({
+      next: (data) => {
+        this.curriculos = data.map((curriculo) => {
+          return {
+            ...curriculo,
+            skills: curriculo.skills.map((skill: any) => {
+              return {
+                name: skill.name,
+                description: skill.description,
+                 level: skill.level
+              } ;
+             }),
+          } ;
+        });
+         this.userCurriculos = this.curriculos.filter((curriculo) => curriculo.email === this.userEmail);
+      },
+      error: (error) => {
+        console.error('Erro ao obter os currículos:', error);
+      }
+    });
+  }
+
+  ngOnChange() {
+    this.getCurriculos();
   }
 
 
@@ -78,15 +108,14 @@ export class UserComponent implements OnInit {
 
   submitCurriculo(): void {
     const dataValues = this.curriculo.value;
-    console.log(dataValues);
-
     this.curriculosService.registerCurriculo(dataValues).subscribe(
       (response) => {
-        console.log('Usuário registrado com sucesso!', response);
+        console.log('Curriculo registrado com sucesso!', response);
         // Fazer algo aqui após o registro bem-sucedido, se necessário.
+        this.getCurriculos();
       },
       (error) => {
-        console.error('Erro ao registrar usuário:', error);
+        console.error('Erro ao registrar curriculo:', error);
         window.alert(error.error?.message || 'Erro ao registrar usuário');
       }
     );
@@ -99,24 +128,6 @@ export class UserComponent implements OnInit {
       control?.markAsUntouched();
     }
   }
-
-  verMesusCurriculo() {
-    this.curriculosService.getCurriculosByEmail(this.userEmail).subscribe(
-      (data: any) => {
-        console.log('data',data);
-        this.curriculos = data.map((curriculo: any) => {
-          return {
-            ...curriculo,
-            skills: curriculo.skills?.map((skill: { name: any }) => skill.name),
-          };
-        });
-      },
-      (error) => {
-        console.error('Erro ao obter os currículos:', error);
-      }
-    );
-  }
-
 
   validarCPF(control: FormControl): { [key: string]: any } | null {
     let cpf = control.value;

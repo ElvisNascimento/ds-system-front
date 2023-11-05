@@ -1,0 +1,15 @@
+<app-header></app-header>
+<div class="row">
+  <app-aside class="col-0 col-sm-2"></app-aside>
+  <div class="centralizar col-12 col-sm-10">
+    <h1>Welcome, {{ loggedInUser }}!</h1>
+    <h2>Currículos Cadastrados</h2>
+
+    <ng-content></ng-content> <!-- Espaço reservado para o conteúdo dinâmico -->
+    <div class="w-100">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="mb-4 w-100 h-25"></div>
+  </div>
+</div>
+<app-footer></app-footer>
