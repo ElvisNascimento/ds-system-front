@@ -19,7 +19,7 @@ export class CurriculosComponent implements OnInit {
   ngOnInit(): void {
     this.curriculosService.getCurriculos().subscribe({
       next: (data) => {
-        console.log(data);
+        // console.log(data);
         this.curriculos = data.map((curriculo) => {
           return {
             ...curriculo,
@@ -38,24 +38,16 @@ export class CurriculosComponent implements OnInit {
       }
     });
   }
+
   selectCurriculo(idCurriculo: any){
-    console.log(idCurriculo);
-
-    // Chame um método para obter o objeto de currículo com base no ID.
-    const curriculo = this.obterCurriculoPorId(idCurriculo);
-
-    // Chame setCurriculoSelecionado com o currículo obtido.
-    return this.curriculosService.setCurriculoSelecionado(curriculo);
+    return this.curriculoSelecionado = this.curriculos.find(curriculo => curriculo.id === idCurriculo);
   }
 
-  obterCurriculoPorId(idCurriculo: any) {
-    // Implemente a lógica para obter o currículo com base no ID.
-    // Pode ser uma chamada a um serviço ou uma busca no array de currículos.
-    // Por exemplo:
-    return this.curriculos.find(curriculo => curriculo.id === idCurriculo);
-  }
 
   setNewStatus(curriculoId: any) {
+    console.log(curriculoId);
+    this.selectCurriculo(curriculoId);
+
     console.log(this.selectedStatus)
     console.log('curriculo',this.curriculoSelecionado);
 

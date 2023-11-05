@@ -31,7 +31,7 @@
               <strong><span>Função: </span></strong> <span> {{ curriculo.func }}</span><br />
             </div>
             <div class="ml-auto p-2 w-50 mb-2">
-              <select class="form-select w-50" aria-label="Default select example" [(ngModel)]="selectedStatus" name="status">
+              <select class="form-select w-50" aria-label="Default select example" [(ngModel)]="selectedStatus" name="status" (select)="selectCurriculo(curriculo.id)">
                 <option value="" disabled selected>Status</option>
                 <option value="Aguardando">Aguardando</option>
                 <option value="Aprovado">Aprovado</option>
