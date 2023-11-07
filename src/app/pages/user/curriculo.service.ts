@@ -10,11 +10,11 @@ export class CurriculosService {
 
   private curriculoSelecionado: any = null;
 
-  curriculoId:any = 0;
+  curriculoId: any = 0;
 
   constructor(private http: HttpClient) { }
 
-  ngOnChange(){
+  ngOnChange() {
     this.updateCurriculo;
   }
 
@@ -22,7 +22,7 @@ export class CurriculosService {
     return this.http.get<any[]>(this.apiUrl);
   }
 
-  getCurriculosByEmail(userEmail: any): Observable<any[]> {
+  getCurriculosByEmail(userEmail: string): Observable<any[]> {
     return this.http.get<any[]>(this.apiUrl + userEmail);
   }
 
@@ -51,19 +51,8 @@ export class CurriculosService {
     return this.curriculoSelecionado;
   }
 
-  updateCurriculo(newStatus: string): Observable<any> {
-    const curriculoSelecionado = this.getCurriculoSelecionado(); // Obtenha o currículo selecionado
+  updateCurriculo(curriculoId: any, status: string): Observable<any> {
 
-    if (curriculoSelecionado) {
-      const curriculoAtualizado = {
-        ...curriculoSelecionado,
-        status: newStatus,
-      };
-
-      return this.http.patch(this.apiUrl + curriculoAtualizado.id, curriculoAtualizado);
-    } else {
-      console.error('Nenhum currículo selecionado');
-      return throwError('Nenhum currículo selecionado'); // Retorne um Observable de erro
-    }
+    return this.http.patch(this.apiUrl + curriculoId, { status });
   }
 }

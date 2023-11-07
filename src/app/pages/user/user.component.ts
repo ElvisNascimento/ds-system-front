@@ -55,24 +55,11 @@ export class UserComponent implements OnInit {
   }
 
   getCurriculos() {
-    this.curriculosService.getCurriculos().subscribe({
+    console.log(this.userEmail);
+
+    this.curriculosService.getCurriculosByEmail(this.userEmail).subscribe({
       next: (data) => {
-        this.curriculos = data.map((curriculo) => {
-          return {
-            ...curriculo,
-            skills: curriculo.skills.map((skill: any) => {
-              return {
-                name: skill.name,
-                description: skill.description,
-                 level: skill.level
-              } ;
-             }),
-          } ;
-        });
-         this.userCurriculos = this.curriculos.filter((curriculo) => curriculo.email === this.userEmail);
-      },
-      error: (error) => {
-        console.error('Erro ao obter os currículos:', error);
+        this.userCurriculos = data
       }
     });
   }

@@ -45,9 +45,9 @@ export class AnalyticsComponent implements OnInit {
           };
         });
         // Contando quantidades
-        this.quantAprovados = this.curriculos.filter((curriculo: { status: string; }) => curriculo.status === 'aprovado').length;
-        this.quantAguardando = this.curriculos.filter((curriculo: { status: string; }) => curriculo.status === 'aguardando').length;
-        this.quantReprovados = this.curriculos.filter((curriculo: { status: string; }) => curriculo.status === 'reprovado').length;
+        this.quantAprovados = this.curriculos.filter((curriculo: { status: string; }) => curriculo.status.toLowerCase() === 'aprovado').length;
+        this.quantAguardando = this.curriculos.filter((curriculo: { status: string; }) => curriculo.status.toLowerCase() === 'aguardando').length;
+        this.quantReprovados = this.curriculos.filter((curriculo: { status: string; }) => curriculo.status.toLowerCase() === 'reprovado').length;
 
         this.getStatus();
 

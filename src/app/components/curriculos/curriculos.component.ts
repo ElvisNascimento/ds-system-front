@@ -44,17 +44,17 @@ export class CurriculosComponent implements OnInit {
   }
 
 
-  setNewStatus(curriculoId: any) {
-    console.log(curriculoId);
-    this.selectCurriculo(curriculoId);
+  setNewStatus(curriculoId: any, status: string) {
+    // console.log(curriculoId);
+    // this.selectCurriculo(curriculoId);
 
-    console.log(this.selectedStatus)
-    console.log('curriculo',this.curriculoSelecionado);
+    // console.log(this.selectedStatus)
+    // console.log('curriculo',this.curriculoSelecionado);
 
     if (this.curriculoSelecionado && this.selectedStatus) {
       this.curriculoSelecionado.status = this.selectedStatus;
 
-      this.curriculosService.updateCurriculo(curriculoId).subscribe({
+      this.curriculosService.updateCurriculo(curriculoId, status).subscribe({
         next: (data) => {
           console.log('Status do currículo atualizado com sucesso:', data);
         },
